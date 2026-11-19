@@ -85,8 +85,7 @@ function runShot(name) {
   const scene = stageShot(name, world);
   let painted = 0;
   function paint() {
-    renderer.draw(world.state, null, canvas.width, canvas.height);
-    hud.drawOverlay(world.state, canvas.width, canvas.height, scene.screen, false);
+    renderer.draw(world.state, hud, canvas.width, canvas.height, scene.screen, false);
     painted += 1;
     if (painted < 2) requestAnimationFrame(paint);
     else window.__shotReady = true;
@@ -226,8 +225,7 @@ function runGame() {
       accumulator = 0;
     }
     audio.update(1 / 60, audioSnapshot());
-    renderer.draw(world.state, null, canvas.width, canvas.height);
-    hud.drawOverlay(world.state, canvas.width, canvas.height, screen, saveExists);
+    renderer.draw(world.state, hud, canvas.width, canvas.height, screen, saveExists);
   }
 
   document.addEventListener('visibilitychange', () => {
