@@ -78,6 +78,30 @@ writes `dossier.json`.
 Screenshot scenes are staged deterministically with `?shot=cover|chase|mission|world&seed=1`
 (see `shots.json`).
 
+## Development notes
+
+A few design decisions worth recording:
+
+- **One simulation, no DOM.** `world.js` owns every piece of game state and advances it in
+  fixed 1/60 s steps from a plain input snapshot. Rendering (`render.js`) and the HUD
+  (`hud.js`) only read state, which is why the whole simulation — including all four
+  screenshot scenes — can be stepped headlessly in Node to verify it before a browser ever
+  opens the page.
+- **Seeded city.** The city is generated from a seeded RNG (`random.js`), so `?seed=1`
+  builds exactly the same Viceport every time and the screenshot scenes in `shots.js` are
+  deterministic: they drive the real simulation with scripted inputs instead of posing a
+  fake frame.
+- **Witnessed crime.** Heat only rises when a pedestrian or an officer is near enough to
+  see the act (stealing an occupied car always counts — the driver sees it). That single
+  rule makes quiet streets genuinely safer than crowded ones and gives the wanted decay
+  something fair to measure: time unseen, not time served.
+- **Police predict, traffic reacts.** Patrol cars steer to the player's predicted position
+  rather than the current one, which makes 3-star chases feel like pursuit instead of
+  tailgating; traffic cars only know about the vehicle directly ahead of them, so jams
+  form naturally behind a stopped player car.
+- **No assets at all.** Every visual is drawn in code and every sound is synthesized with
+  WebAudio, so the game folder is under 100 KB and loads with zero network requests.
+
 ---
 
 Built for the make.fun gta6-01 bounty — try the platform: https://make.fun/?ref=1e3qpbvy
