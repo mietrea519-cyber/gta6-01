@@ -9,7 +9,7 @@
 import { BUSTED_FEE, SAVE_KEY, STEP, WASTED_FEE } from './config.js';
 import { createRandom } from './random.js';
 import { createWorld, EVENT_BUSTED, EVENT_WASTED } from './world.js';
-import { ACTION_ADVANCE, ACTION_INTERACT, ACTION_MUTE, ACTION_PAUSE, ACTION_RELOAD, createInput } from './input.js';
+import { ACTION_ADVANCE, ACTION_CONFIRM, ACTION_INTERACT, ACTION_MUTE, ACTION_PAUSE, ACTION_RELOAD, createInput } from './input.js';
 import { createRenderer, SCREEN_BUSTED, SCREEN_PAUSED, SCREEN_PLAY, SCREEN_TITLE, SCREEN_WASTED } from './render.js';
 import { createHud } from './hud.js';
 import { createAudio } from './audio.js';
