@@ -23,9 +23,9 @@ export function skyTintForHour(hours) {
 export function createRenderer(canvas) {
   const ctx = canvas.getContext('2d');
   return {
-    draw(state, hud, viewW, viewH) {
+    draw(state, hud, viewW, viewH, screen, saveExists) {
       drawScene(ctx, state, viewW, viewH);
-      if (hud) hud.drawOverlay(ctx, state, viewW, viewH);
+      if (hud) hud.drawOverlay(ctx, state, viewW, viewH, screen, saveExists);
     },
   };
 }
